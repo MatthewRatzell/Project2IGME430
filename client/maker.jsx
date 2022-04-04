@@ -1,0 +1,134 @@
+const helper = require('./helper.js');
+
+const handleDomo = (e) => {
+    e.preventDefault();
+    helper.hideError();
+
+    const name = e.target.querySelector('#domoName').value;
+    const age = e.target.querySelector('#domoAge').value;
+    const height = e.target.querySelector('#domoHeight').value;
+    const _csrf = e.target.querySelector('#_csrf').value;
+
+    if (!name || !age || !height) {
+        helper.handleError('All fields are required!');
+        return false;
+    }
+
+    helper.sendPost(e.target.action, { name, age, height, _csrf }, loadDomosFromServer);
+    return false;
+}
+const addRandomDomo= (e) =>{
+
+    e.preventDefault();
+    helper.hideError();
+
+    const _csrf = e.target.querySelector('#_csrf').value;
+
+    helper.sendPost(e.target.action, { _csrf },loadDomosFromServer);
+    return false;
+}
+const DomoForm = (props) => {
+    return (
+
+        <form id="domoForm"
+            name="domoForm"
+            onSubmit={handleDomo}
+            action="/maker"
+            method="POST"
+            className="domoForm">
+
+
+            <label htmlFor="name">Name: </label>
+            <input id="domoName" type="text" name="name" placeholder="Domo Name" />
+
+            <label htmlFor="age">Age: </label>
+            <input id="domoAge" type="number" min="0" name="age" placeholder="5" />
+
+
+
+            <label htmlFor="height">Height: </label>
+            <input id="domoHeight" type="number" min="0" name="height" placeholder="56" />
+
+            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+
+            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+        </form>
+    );
+}
+const AddRandomDomosForm = (props) => {
+    return (
+
+        <form id="addRandomDomo"
+            name="addRandomDomo"
+            onSubmit={addRandomDomo}
+            action="/addRandomDomo"
+            method="POST"
+            className="addRandomDomo">
+
+            <input className="addRandomDomos" type="submit" value="Add a random domo" />
+            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+        </form>
+    );
+}
+const DomoList = (props) => {
+    //if empty
+    if (props.domos.length === 0) {
+        return (
+            <div className="domoList">
+                <h3 className="emptyDomo">No Domos yet!</h3>
+            </div>
+        );
+    }
+
+    const domoNodes = props.domos.map(domo => {
+        return (
+            <div key={domo._id} className="domo">
+
+                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
+                <h3 className="domoName">Name:{domo.name}</h3>
+                <h3 className="domoAge">Age:{domo.age}</h3>
+                <h3 className="domoHeight">Height:{domo.height}</h3>
+            </div>
+        );
+    });
+
+    return (
+        <div className="domoList">
+            {domoNodes}
+        </div>
+    );
+}
+
+const loadDomosFromServer = async () => {
+    const response = await fetch('/getDomos');
+    const data = await response.json();
+
+    ReactDOM.render(
+        <DomoList domos={data.domos} />,
+        document.getElementById('domos')
+    );
+}
+
+const init = async () => {
+    const response = await fetch('/getToken');
+    const data = await response.json();
+
+    ReactDOM.render(
+        <DomoForm csrf={data.csrfToken} />,
+        document.getElementById('makeDomo')
+    );
+
+    ReactDOM.render(
+        <DomoList domos={[]} />,
+        document.getElementById('domos')
+    );
+
+    ReactDOM.render(
+        <AddRandomDomosForm csrf={data.csrfToken} />,
+        document.getElementById('AddRandomDomosForm')
+    );
+
+    loadDomosFromServer();
+}
+
+window.onload = init;
