@@ -3,9 +3,7 @@ const mid = require('./middleware');
 
 const router = (app) => {
   app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);
-  app.get('/getDomos', mid.requiresLogin, controllers.Domo.getDomos);
-
-  app.post('/addRandomDomo', mid.requiresLogin, controllers.Domo.addRandomDomo);
+  app.get('/getTasks', mid.requiresLogin, controllers.Taskboard.getTasks);
 
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
@@ -13,8 +11,10 @@ const router = (app) => {
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
-  app.get('/maker', mid.requiresLogin, controllers.Domo.makerPage);
-  app.post('/maker', mid.requiresLogin, controllers.Domo.makeDomo);
+
+
+  app.get('/taskBoard', mid.requiresLogin, controllers.Taskboard.taskPage);
+  app.post('/taskBoard', mid.requiresLogin, controllers.Taskboard.makeTask);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 

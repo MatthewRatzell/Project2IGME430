@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const _ = require('underscore');
 
-let DomoModel = {};
+let TaskModel = {};
 
 const setName = (name) => _.escape(name).trim();
 
-const DomoSchema = new mongoose.Schema({
+const TaskSchema = new mongoose.Schema({
 
   name: {
     type: String,
@@ -35,20 +35,20 @@ const DomoSchema = new mongoose.Schema({
 
 });
 
-DomoSchema.statics.toAPI = (doc) => ({
+TaskSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
   height: doc.height,
 });
 
-DomoSchema.statics.findByOwner = (ownerId, callback) => {
+TaskSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     // convert the string ownerId to an object id
     owner: mongoose.Types.ObjectId(ownerId),
   };
-  return DomoModel.find(search).select('name age height').lean().exec(callback);
+  return TaskModel.find(search).select('name age height').lean().exec(callback);
 };
 
-DomoModel = mongoose.model('Domo', DomoSchema);
+TaskModel = mongoose.model('Task', TaskSchema);
 
-module.exports = DomoModel;
+module.exports = TaskModel;

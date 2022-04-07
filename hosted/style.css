@@ -50,7 +50,7 @@ nav:nth-child(1) {
     background-color: #66bdff;
 }
 
-.domoForm {
+.taskForm {
     border: 2px solid #338acc;
     height: 35px;
     width: 1000px;
@@ -61,7 +61,7 @@ nav:nth-child(1) {
     border-top-right-radius: 4px;
 }
 
-.domoForm label {
+.taskForm label {
     display: inline-block;
     width: 75px;
     margin-left: 10px;
@@ -70,11 +70,11 @@ nav:nth-child(1) {
     color: white;
 }
 
-.domoForm input[type=text] {
+.taskForm input[type=text] {
     float:left;
 }
 
-.makeDomoSubmit {
+.maketaskSubmit {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
@@ -84,11 +84,11 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
+.maketaskSubmit:link, .maketaskSubmit:visited, .maketaskSubmit:hover, .maketaskSubmit:active {
     color: white;
 }
 
-.makeDomoSubmit:hover {
+.maketaskSubmit:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
 }
@@ -154,7 +154,7 @@ nav:nth-child(1) {
     display: none;
 }
 
-#domoMessage {
+#taskMessage {
     top: 250px;
     width: 250px;
     height: 650px;
@@ -164,7 +164,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#domoMessage h3 {
+#taskMessage h3 {
     width: 200px;
     position: absolute;
     top: 0px;
@@ -184,7 +184,7 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#task {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
@@ -195,7 +195,7 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
+#tasks {
     width: 40%;
     min-width: 400px;
     border: 2px solid #55acee;
@@ -204,7 +204,7 @@ nav:nth-child(1) {
     margin-top: 100px;
 }
 
-.domo {
+.task {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -217,14 +217,14 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.domo:hover {
+.task:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
     background-color: #66bfff;
 }
 
-img.domoFace {
+img.taskFace {
     margin-left: 25px;
     margin-right: 10px;
     height: 50px;
@@ -234,7 +234,7 @@ img.domoFace {
     float:left;
 }
 
-h3.emptyDomo {
+h3.emptytask {
     width: 400px;
     font-size: 1.5em;
     margin: 0 auto;
@@ -242,7 +242,7 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
+h3.taskName {
     float:left;
     width: 200px;
     font-weight: bold;
@@ -250,7 +250,7 @@ h3.domoName {
     font-size: 1.5em;
 }
 
-h3.domoAge {
+h3.taskAge {
     float:right;
     text-align: left;
     width: 100px;
@@ -259,10 +259,10 @@ h3.domoAge {
     font-size: 1.5em;
 }
 
-.domo:first-child {
+.task:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.task:last-child {
     margin-bottom:10px;
 }

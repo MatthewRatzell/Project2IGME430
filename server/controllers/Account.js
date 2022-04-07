@@ -6,12 +6,14 @@ const loginPage = (req, res) => {
   res.render('login', { csrfToken: req.csrfToken() });
 };
 
+//function to get the token for a specific request
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });
 const logout = (req, res) => {
   // make sure we destroy mcookies on the schmove
   req.session.destroy();
   res.redirect('/');
 };
+
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -25,7 +27,7 @@ const login = (req, res) => {
       return res.status(400).json({ error: 'All fields are required!' });
     }
     req.session.account = Account.toAPI(account);
-    return res.json({ redirect: '/maker' });
+    return res.json({ redirect: '/taskBoard' });
   });
 };
 
@@ -47,7 +49,7 @@ const signup = async (req, res) => {
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
-    return res.json({ redirect: '/maker' });
+    return res.json({ redirect: '/taskBoard' });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {

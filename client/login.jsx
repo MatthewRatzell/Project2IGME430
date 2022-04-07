@@ -6,10 +6,14 @@ const helper = require('./helper.js');
 
 //built in redirect and error handling done for us
 const handleLogin = (e) => {
-    console.log("fired");
+    //e is the form calling
+
     e.preventDefault();
+
+    
     helper.hideError();
 
+    //pull in the 3 things we need from the form
     const username = e.target.querySelector('#user').value;
     const pass = e.target.querySelector('#pass').value;
     const _csrf = e.target.querySelector('#_csrf').value;
@@ -19,6 +23,7 @@ const handleLogin = (e) => {
         return false;
     }
 
+    //send the post to call our router 
     helper.sendPost(e.target.action, { username, pass, _csrf });
     return false;
 }
@@ -88,9 +93,12 @@ const SignupWindow = (props) => {
 
 //grabs out token set up event listeners
 const init = async () => {
+    //get our token
     const response = await fetch('/getToken');
+    //put it in json this will be used for the props of our react object and will make things more secure
     const data = await response.json();
 
+    //grab the different buttons we need from the view
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
 
@@ -108,6 +116,7 @@ const init = async () => {
         return false;
     });
 
+    //auto default to rendering login window
     ReactDOM.render(<LoginWindow csrf={data.csrfToken} />,
         document.getElementById('content'));
 }
