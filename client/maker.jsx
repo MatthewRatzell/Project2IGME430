@@ -15,21 +15,11 @@ const handletask = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, { name, age, height, _csrf }, loadtasksFromServer);
+    helper.sendPost(e.target.action, { name, age, height, _csrf }, loadTasksFromServer);
     return false;
 }
-/*
-const addRandomtask= (e) =>{
 
-    e.preventDefault();
-    helper.hideError();
-
-    const _csrf = e.target.querySelector('#_csrf').value;
-
-    helper.sendPost(e.target.action, { _csrf },loadtasksFromServer);
-    return false;
-}
-*/
+//where we add our tasks
 const TaskForm = (props) => {
     return (
 
@@ -41,10 +31,10 @@ const TaskForm = (props) => {
             className="taskForm">
 
 
-            <label htmlFor="name">Name: </label>
-            <input id="taskName" type="text" name="name" placeholder="task Name" />
+            <label htmlFor="title">Title: </label>
+            <input id="taskTitle" type="text" name="name" placeholder="task title" />
 
-            <label htmlFor="age">Age: </label>
+            <label htmlFor="description">Description: </label>
             <input id="taskAge" type="number" min="0" name="age" placeholder="5" />
 
 
@@ -52,29 +42,13 @@ const TaskForm = (props) => {
             <label htmlFor="height">Height: </label>
             <input id="taskHeight" type="number" min="0" name="height" placeholder="56" />
 
-            <input className="maketaskSubmit" type="submit" value="Make task" />
+            <input className="makeTaskSubmit" type="submit" value="Make task" />
 
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
         </form>
     );
 }
-/*
-const AddRandomtasksForm = (props) => {
-    return (
 
-        <form id="addRandomtask"
-            name="addRandomtask"
-            onSubmit={addRandomtask}
-            action="/addRandomtask"
-            method="POST"
-            className="addRandomtask">
-
-            <input className="addRandomtasks" type="submit" value="Add a random task" />
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-        </form>
-    );
-}
-*/
 const TaskList = (props) => {
     //if empty
     if (props.tasks.length === 0) {
@@ -89,14 +63,15 @@ const TaskList = (props) => {
     const taskNodes = props.tasks.map(task => {
         return (
             <div key={task._id} className="task">
-
                 <img src="/assets/img/taskface.jpeg" alt="task face" className="taskFace" />
-                <h3 className="taskName">Name:{task.name}</h3>
-                <h3 className="taskAge">Age:{task.age}</h3>
-                <h3 className="taskHeight">Height:{task.height}</h3>
+                <h3 className="taskTitle">Title:{task.title}</h3>
+                <h3 className="taskDescription">Description:{task.description}</h3>
+                <h3 className="taskDueDate">Due Date:{task.dueDate}</h3>
             </div>
         );
     });
+
+
     //after constructing our list output it to the user
     return (
         <div className="taskList">
@@ -106,7 +81,7 @@ const TaskList = (props) => {
 }
 
 //function that handles loading tasks from server
-const loadtasksFromServer = async () => {
+const loadTasksFromServer = async () => {
     //get the response from the router so we have our data.tasks
     const response = await fetch('/getTasks');
     const data = await response.json();
@@ -135,7 +110,7 @@ const init = async () => {
     );
 
 
-    loadtasksFromServer();
+    loadTasksFromServer();
 }
 
 window.onload = init;

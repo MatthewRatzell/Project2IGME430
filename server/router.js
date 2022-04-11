@@ -14,6 +14,7 @@ const router = (app) => {
 
 
   app.get('/taskBoard', mid.requiresLogin, controllers.Taskboard.taskPage);
+  
   app.post('/taskBoard', mid.requiresLogin, controllers.Taskboard.makeTask);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };

@@ -7,10 +7,7 @@ const helper = require('./helper.js');
 //built in redirect and error handling done for us
 const handleLogin = (e) => {
     //e is the form calling
-
     e.preventDefault();
-
-    
     helper.hideError();
 
     //pull in the 3 things we need from the form
@@ -23,6 +20,7 @@ const handleLogin = (e) => {
         return false;
     }
 
+    console.log(`${username},${pass}`);
     //send the post to call our router 
     helper.sendPost(e.target.action, { username, pass, _csrf });
     return false;
@@ -63,6 +61,7 @@ const LoginWindow = (props) => {
             <input id="user" type="text" name="username" placeholder="username" />
             <label htmlFor="pass">Password: </label>
             <input id="pass" type="password" name="pass" placeholder="password" />
+            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input className="formSubmit" type="submit" value="Sign in" />
         </form>
     );
@@ -104,7 +103,7 @@ const init = async () => {
 
     loginButton.addEventListener('click',(e)=>{
         e.preventDefault();
-        ReactDOM.render(<LoginWindow csrf={data.csrfToken}/>,
+        ReactDOM.render(<LoginWindow csrf={data.csrfToken} />,
         document.getElementById('content'));
         return false;
     });
