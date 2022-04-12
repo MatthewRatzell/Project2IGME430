@@ -3,6 +3,7 @@
    end in an error.
 */
 const handleError = (message) => {
+    console.log(`${message}`);
     document.getElementById('errorMessage').textContent = message;
     document.getElementById('taskMessage').classList.remove('hidden');
 };
@@ -29,23 +30,41 @@ const sendPost = async (url, data, handler) => {
         window.location = result.redirect;
     }
 
-    if(handler){
+    if (handler) {
         handler(result);
     }
 
 
 };
 
-const hideError = ()=>{
+const hideError = () => {
     document.getElementById('taskMessage').classList.add('hidden');
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////main.js unedited//////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
 
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
-module.exports={
+function drop(ev) {
+    ev.preventDefault();
+    if (ev.target.className === 'clonedDiv' || ev.target.className === "card")
+        return;
+    var data = ev.dataTransfer.getData("text");
+    //console.log(document.getElementById(data));
+    ev.target.appendChild(document.getElementById(data));
+}
+
+module.exports = {
     handleError,
     sendPost,
     hideError,
+    drag,
+    allowDrop,
+    drop,
 };

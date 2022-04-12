@@ -5,12 +5,13 @@
   <title>taskMaker</title>
   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="shortcut icon" href="/assets/img/favicon.png" />
-  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/main.css" />
 </head>
 
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo" /></a>
+  <nav><a href="/login"></a>
     <div class="navlink"><a href="/logout">Log out</a></div>
   </nav>
 
@@ -18,18 +19,40 @@
 
   </section>
 
- 
-  
-  <section id="tasks">
 
+  <section class="container">
+    <div class="taskboard-heading">
+      <strong class="taskboard-heading-text is-size-2 has-text-centered">Task Board</strong>
+    </div>
+    <div class="taskboard">
+      <div id="toDo" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        <strong>To Do</strong>
+      </div>
+      <div id="inProgress" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        <strong>In Progress</strong>
+      </div>
+      <div id="done" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
+        ondragover="allowDrop(event)">
+        <strong>Done</strong>
+      </div>
+    </div>
   </section>
 
+  <section id="burnerDivHome">
+    <div id="burnerDiv" draggable="true" ondragstart="drag(event)" ondrop="return false;"></div>
+    <div id="burnerDivCopy" draggable="true" ondragstart="drag(event)" ondrop="return false;"></div>
+    <div id="burnerDivCopy" draggable="true" ondragstart="drag(event)" ondrop="return false;"></div>
+  </section>
+
+
   <div id="taskMessage" class='hidden'>
-    <img id="speech" src="/assets/img/speech.png" alt="speech box" />
     <h3><span id="errorMessage"></span></h3>
-    <img id="task" src="assets/img/task.png" alt="task" />
   </div>
   <script src="/assets/appBundle.js"></script>
+
+
 </body>
 
 </html>

@@ -3,24 +3,23 @@ const _ = require('underscore');
 
 let TaskModel = {};
 
-const setName = (name) => _.escape(name).trim();
+const setTitle = (title) => _.escape(title).trim();
 
 const TaskSchema = new mongoose.Schema({
 
-  name: {
+  title: {
     type: String,
     required: true,
     trim: true,
-    set: setName,
+    set: setTitle,
   },
-  age: {
-    type: Number,
-    min: 0,
+  description: {
+    type: String,
     required: true,
+    trim: true,
   },
-  height: {
-    type: Number,
-    min: 0,
+  dueDate: {
+    type: Date,
     required: true,
   },
   owner: {
@@ -36,9 +35,9 @@ const TaskSchema = new mongoose.Schema({
 });
 
 TaskSchema.statics.toAPI = (doc) => ({
-  name: doc.name,
-  age: doc.age,
-  height: doc.height,
+  name: doc.title,
+  description: doc.description,
+  dueDate: doc.dueDate,
 });
 
 TaskSchema.statics.findByOwner = (ownerId, callback) => {
@@ -46,7 +45,7 @@ TaskSchema.statics.findByOwner = (ownerId, callback) => {
     // convert the string ownerId to an object id
     owner: mongoose.Types.ObjectId(ownerId),
   };
-  return TaskModel.find(search).select('name age height').lean().exec(callback);
+  return TaskModel.find(search).select('title description dueDate').lean().exec(callback);
 };
 
 TaskModel = mongoose.model('Task', TaskSchema);
