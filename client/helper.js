@@ -43,28 +43,20 @@ const hideError = () => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////main.js unedited//////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
 
-function allowDrop(ev) {
-    ev.preventDefault();
-}
+function makeid() {
+    var text = "";
+    var possible = "abcdefghijklmnopqrstuvwxyz";
 
-function drop(ev) {
-    ev.preventDefault();
-    if (ev.target.className === 'clonedDiv' || ev.target.className === "card")
-        return;
-    var data = ev.dataTransfer.getData("text");
-    //console.log(document.getElementById(data));
-    ev.target.appendChild(document.getElementById(data));
-}
+    for (var i = 0; i < 12; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
 
+    return text;
+}
 module.exports = {
     handleError,
     sendPost,
     hideError,
-    drag,
-    allowDrop,
-    drop,
+    makeid,
+
 };

@@ -88,7 +88,6 @@ const loadTaskList = (tasks) => {
         //rename the coppied empty template to burnerDiv
         document.getElementById('burnerDivCopy').id = 'burnerDiv';
 
-
         //render each reactDom
         ReactDOM.render(
             <Task task={tasks[i]} />,
@@ -97,22 +96,21 @@ const loadTaskList = (tasks) => {
 
         //make sure it goes into its right homw
         if (tasks[i].currentBoard == 'todo') {
-
+            toDo.append(document.getElementById('burnerDiv'));
         }
         else if (tasks[i].currentBoard == 'inProgress') {
-
+            inProgress.append(document.getElementById('burnerDiv'));
         }
         else if (tasks[i].currentBoard == 'done') {
-
+            done.append(document.getElementById('burnerDiv'));
         }
         else {
             //now that the react element is in a burner div we can transfer it to the appropriate branch
             toDo.append(document.getElementById('burnerDiv'));
         }
 
-
         //now that the first burner div has been moved to todo we need to change its id
-        document.getElementById('burnerDiv').id = "abcdefg";
+        document.getElementById('burnerDiv').id = helper.makeid();;
 
         //first duplicate our burner div and add it to the home of divs 
         burnerDivsHome.append(document.getElementById('burnerDivCopy').cloneNode(true));
@@ -138,127 +136,7 @@ const init = async () => {
         document.getElementById('makeTask')
     );
 
-
-    /*
-    //on init load page without tasks so this works for users logged in and users that are logged out
-    ReactDOM.render(
-        <TaskList tasks={[]} />,
-        document.getElementById('tasks')
-    );
-*/
-
     loadTasksFromServer();
 }
 
 window.onload = init;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-const TaskList = (props) => {
-    //if empty
-    if (props.tasks.length === 0) {
-        return (
-            <div className="taskList">
-                <h3 className="emptytask">No tasks yet!</h3>
-            </div>
-        );
-    }
-
-    //loop through and create all of our react tasks
-    for (let i = 0; i < props.tasks.length; i++) {
-        //render each reactDom
-        ReactDOM.render(
-            <Task task={props.tasks[i]}/>,
-            document.getElementById('todo')
-        );
-    }
-
-}
-/*
-const TaskList = (props) => {
-    //if empty
-    if (props.tasks.length === 0) {
-        return (
-            <div className="taskList">
-                <h3 className="emptytask">No tasks yet!</h3>
-            </div>
-        );
-    }
-
-    //loop through and create all of our react tasks
-    for(let i =0;i<props.tasks.length;i++){
-
-    }
-    //create our list
-    const taskNodes = props.tasks.map(task => {
-        return (
-            <div key={task._id} className="task">
-                <h3 className="taskTitle">Title:{task.title}</h3>
-                <h3 className="taskDescription">Description:{task.description}</h3>
-                <h3 className="taskDueDate">Due Date:{task.dueDate}</h3>
-            </div>
-        );
-    });
-
-
-    //after constructing our list output it to the user
-    return (
-        <div className="taskList">
-            {taskNodes}
-        </div>
-    );
-}
-*/
-/*
-//function that handles loading tasks from server
-const loadTasksFromServer = async () => {
-    //get the response from the router so we have our data.tasks
-    const response = await fetch('/getTasks');
-    const data = await response.json();
-
-    //render now using the data
-    ReactDOM.render(
-        <TaskList tasks={data.tasks} />,
-        document.getElementById('todo')
-    );
-}
-*/

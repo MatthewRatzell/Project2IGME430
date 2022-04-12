@@ -1,3 +1,6 @@
+///////////////////////////////////////////////////////////////////
+/////////////////////////board///////////////////////////////////
+/////////////////////////////////////////////////////////////////
 .container {
     width: 90%;
     min-width: 50%;
@@ -38,3 +41,41 @@
     background-color: rgb(71, 69, 69);
 
 }
+#toDo{
+
+}
+#inProgress{
+
+
+}
+#done{
+
+
+}
+///////////////////////////////////////////////////////////////////
+/////////////////////////cards///////////////////////////////////
+/////////////////////////////////////////////////////////////////
+h2,h3
+{
+    font-size: 2.0rem;
+    margin-top: 0;
+    color: #000080;
+}
+.card 
+  {
+    overflow:auto;
+    padding:5%;
+    background-color: rgb(192, 189, 189) !important;
+    height: 350px;
+    width: 325px;
+    margin-bottom:10px;
+    justify-content:center;
+  }
+  .topOfCard{
+    margin-bottom:5%;
+  }
+  .middleOfCard{
+    margin-bottom:10%;
+  }
+  .bottomOfCard{
+  }

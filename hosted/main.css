@@ -35,3 +35,27 @@
   border-radius: 0.3rem;
   background-color: #474545;
 }
+
+h2, h3 {
+  font-size: 2rem;
+  margin-top: 0;
+  color: #000080;
+}
+
+.card {
+  overflow: auto;
+  padding: 5%;
+  background-color: #c0bdbd !important;
+  height: 350px;
+  width: 325px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.topOfCard {
+  margin-bottom: 5%;
+}
+
+.middleOfCard {
+  margin-bottom: 10%;
+}
