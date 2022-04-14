@@ -10,12 +10,14 @@ const handletask = (e) => {
     const dueDate = e.target.querySelector('#taskDueDate').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
-    if (!title || !description || !dueDate) {
+    const currentSpot = 'toDo';
+
+    if (!title || !description || !dueDate ||!currentSpot) {
         helper.handleError('All fields are required!');
         return false;
     }
 
-    helper.sendPost(e.target.action, { title, description, dueDate, _csrf }, loadTasksFromServer);
+    helper.sendPost(e.target.action, { title, description, currentSpot, dueDate, _csrf }, loadTasksFromServer);
     return false;
 }
 
@@ -73,6 +75,10 @@ const loadTaskList = (tasks) => {
     const done = document.getElementById('done');
     const burnerDivsHome = document.getElementById('burnerDivHome');
 
+    toDo.innerHTML =`<strong>To Do</strong>`;
+    inProgress.innerHTML =`<strong>In Progress</strong>`;
+    done.innerHTML =`<strong>Done</strong>`;
+
     //if empty
     if (tasks.length === 0) {
         return (
@@ -95,20 +101,16 @@ const loadTaskList = (tasks) => {
         );
 
         //make sure it goes into its right homw
-        if (tasks[i].currentBoard == 'todo') {
+        if (tasks[i].currentSpot == 'toDo') {
             toDo.append(document.getElementById('burnerDiv'));
         }
-        else if (tasks[i].currentBoard == 'inProgress') {
+        else if (tasks[i].currentSpot == 'inProgress') {
             inProgress.append(document.getElementById('burnerDiv'));
         }
-        else if (tasks[i].currentBoard == 'done') {
+        else if (tasks[i].currentSpot == 'done') {
             done.append(document.getElementById('burnerDiv'));
         }
-        else {
-            //now that the react element is in a burner div we can transfer it to the appropriate branch
-            toDo.append(document.getElementById('burnerDiv'));
-        }
-
+        
         //now that the first burner div has been moved to todo we need to change its id
         document.getElementById('burnerDiv').id = helper.makeid();;
 

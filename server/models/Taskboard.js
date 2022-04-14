@@ -18,6 +18,11 @@ const TaskSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  currentSpot: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   dueDate: {
     type: Date,
     required: true,
@@ -45,7 +50,7 @@ TaskSchema.statics.findByOwner = (ownerId, callback) => {
     // convert the string ownerId to an object id
     owner: mongoose.Types.ObjectId(ownerId),
   };
-  return TaskModel.find(search).select('title description dueDate').lean().exec(callback);
+  return TaskModel.find(search).select('title description currentSpot dueDate').lean().exec(callback);
 };
 
 TaskModel = mongoose.model('Task', TaskSchema);

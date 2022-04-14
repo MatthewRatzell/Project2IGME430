@@ -12,10 +12,10 @@ const router = (app) => {
 
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-
   app.get('/taskBoard', mid.requiresLogin, controllers.Taskboard.taskPage);
-  
   app.post('/taskBoard', mid.requiresLogin, controllers.Taskboard.makeTask);
+
+  app.post('/updateTask', mid.requiresLogin, controllers.Taskboard.updateTask);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 
