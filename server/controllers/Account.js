@@ -1,6 +1,7 @@
 const models = require('../models');
 
-const { Account } = models;
+const { Account, Board } = models;
+
 // every req creats a csrf token because set up combine with sessionkey
 const loginPage = (req, res) => {
   res.render('login', { csrfToken: req.csrfToken() });
@@ -17,27 +18,33 @@ const logout = (req, res) => {
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
+  const premium = `${req.body.premium}`;
 
-  if (!username || !pass) {
+  if (!username || !pass || !premium) {
     return res.status(400).json({ error: 'All fields are required!' });
   }
 
   return Account.authenticate(username, pass, (err, account) => {
     if (err || !account) {
-      return res.status(400).json({ error: 'All fields are required!' });
+      return res.status(400).json({ error: 'All fields are required!(server side)' });
     }
+
     req.session.account = Account.toAPI(account);
-    return res.json({ redirect: '/taskBoard' });
+
+
+    return res.json({ redirect: '/boards' });
   });
 };
 
 const signup = async (req, res) => {
+
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
   const pass2 = `${req.body.pass2}`;
+  const premium = `${req.body.premium}`;
 
-  if (!username || !pass || !pass2) {
-    return res.status(400).json({ error: 'All fields are required!' });
+  if (!username || !pass || !pass2 || !premium) {
+    return res.status(400).json({ error: 'All fields are required!(server side)' });
   }
 
   if (pass !== pass2) {
@@ -46,10 +53,25 @@ const signup = async (req, res) => {
 
   try {
     const hash = await Account.generateHash(pass);
-    const newAccount = new Account({ username, password: hash });
+
+    const newAccount = new Account({ username, password: hash, premium });
     await newAccount.save();
+
     req.session.account = Account.toAPI(newAccount);
-    return res.json({ redirect: '/taskBoard' });
+
+    //this is where we will generate the first board for the user automatically
+    const boardData = {
+      title: 'Personal Taskboard',
+      owner: req.session.account._id,
+    };
+
+    const newBoard = new Board(boardData);
+    await newBoard.save();
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+
+    return res.json({ redirect: '/boards' });
+
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
@@ -59,10 +81,14 @@ const signup = async (req, res) => {
   }
 };
 
+const checkPremium = (req, res) => res.json({ premiumStatus: req.session.account.premium });
+
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
   getToken,
+  checkPremium
 };

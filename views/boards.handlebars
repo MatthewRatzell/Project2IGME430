@@ -1,0 +1,55 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>taskMaker</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="shortcut icon" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="/assets/main.css" />
+</head>
+
+<body>
+    <nav><a href="/login"></a>
+        <div class="navlink"><a href="/logout">Log out</a></div>
+    </nav>
+
+    <section id="makeTask">
+    </section>
+
+    <section class="container">
+
+
+        <div class="taskboard-heading">
+            <strong class="taskboard-heading-text is-size-2 has-text-centered">Available TaskBoards</strong>
+        </div>
+
+        <div id="boardsForm">
+
+        </div>
+
+        <div id="boards">
+
+        </div>
+
+    </section>
+
+    <section id="burnerDivHome">
+        <div id="burnerDiv" ></div>
+        <div id="burnerDivCopy" ></div>
+        <div id="burnerDivCopy" ></div>
+    </section>
+
+    <div id="taskMessage" class='hidden'>
+        <h3><span id="errorMessage"></span></h3>
+    </div>
+
+
+
+    <script src="/assets/boardsBundle.js"></script>
+    <script src="/assets/client.js"></script>
+
+</body>
+
+</html>

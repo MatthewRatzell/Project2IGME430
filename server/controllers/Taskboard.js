@@ -15,7 +15,7 @@ const makeTask = async (req, res) => {
     description: req.body.description,
     currentSpot: req.body.currentSpot,
     dueDate: req.body.dueDate,
-    owner: req.session.account._id,
+    owner: req.session.board._id,
   };
 
   try {
@@ -35,7 +35,7 @@ const makeTask = async (req, res) => {
   }
 };
 
-const getTasks = (req, res) => TaskModel.findByOwner(req.session.account._id, (err, docs) => {
+const getTasks = (req, res) => TaskModel.findByOwner(req.session.board._id, (err, docs) => {
   if (err) {
     console.log(err);
     return res.status(400).json({ error: 'An error occured!' });
@@ -45,8 +45,19 @@ const getTasks = (req, res) => TaskModel.findByOwner(req.session.account._id, (e
 
 // does nothing atm just setting it up
 const updateTask = async (req, res) => {
+
+  const cardToUpdate = req.body.title;
+  const newSpotOnBoard = req.body.newSpot;
   // to shut the fucking linters mouth
-  console.log(req, res);
+  await TaskModel.updateOne(
+    //first give it the filter or a way to find the object
+    { title: cardToUpdate },
+    {
+      //now change the values we need to change
+      $set:{ 'currentSpot': `${newSpotOnBoard}`}
+    }
+  );
+
 };
 
 module.exports = {

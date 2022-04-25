@@ -30,7 +30,7 @@ const TaskSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
-    ref: 'Account',
+    ref: 'Board',
   },
   createdDate: {
     type: Date,
@@ -43,6 +43,7 @@ TaskSchema.statics.toAPI = (doc) => ({
   name: doc.title,
   description: doc.description,
   dueDate: doc.dueDate,
+  _id: doc._id,
 });
 
 TaskSchema.statics.findByOwner = (ownerId, callback) => {

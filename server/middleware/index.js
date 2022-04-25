@@ -7,7 +7,10 @@ const requiresLogin = (req, res, next) => {
 
 //
 const requiresLogout = (req, res, next) => {
-  if (req.session.account) {
+  if (req.session.account && !req.session.board) {
+    return res.redirect('/boards');
+  }
+  if (req.session.account && req.session.board) {
     return res.redirect('/taskBoard');
   }
   return next();

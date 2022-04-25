@@ -112,7 +112,7 @@ const loadTaskList = (tasks) => {
         }
         
         //now that the first burner div has been moved to todo we need to change its id
-        document.getElementById('burnerDiv').id = helper.makeid();;
+        document.getElementById('burnerDiv').id = helper.makeid();
 
         //first duplicate our burner div and add it to the home of divs 
         burnerDivsHome.append(document.getElementById('burnerDivCopy').cloneNode(true));
@@ -140,5 +140,7 @@ const init = async () => {
 
     loadTasksFromServer();
 }
+
+
 
 window.onload = init;

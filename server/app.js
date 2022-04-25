@@ -23,6 +23,7 @@ const csrf = require('csurf');
 const router = require('./router.js');
 // grab our config file to access our variables
 const config = require('./config.js');
+
 // set up our ports and
 const port = process.env.PORT || process.env.NODE_PORT || config.connections.http.port;
 const dbURI = process.env.MONGODB_URI || config.connections.mongo;

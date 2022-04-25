@@ -15,14 +15,15 @@ const handleLogin = (e) => {
     const pass = e.target.querySelector('#pass').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
-    if (!username || !pass) {
-        helper.handleError('Username or password is empty!');
+    const premium = '0';
+
+    if (!username || !pass || !premium) {
+        helper.handleError('Username or password is empty!(client side)');
         return false;
     }
 
-    console.log(`${username},${pass}`);
     //send the post to call our router 
-    helper.sendPost(e.target.action, { username, pass, _csrf });
+    helper.sendPost(e.target.action, { username, pass,premium, _csrf });
     return false;
 }
 
@@ -35,15 +36,19 @@ const handleSignup = (e) => {
     const pass2 = e.target.querySelector('#pass2').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
-    if (!username || !pass || !pass2) {
-        helper.handleError('All fields are required');
+    const premium = '0';
+
+    if (!username || !pass || !pass2 || !premium) {
+        helper.handleError('All fields are required(client side)');
         return false;
     }
     if (pass !== pass2) {
         helper.handleError('Passwords do not match!');
         return false;
     }
-    helper.sendPost(e.target.action, { username, pass, pass2, _csrf });
+
+    helper.sendPost(e.target.action, { username, pass, pass2, premium, _csrf });
+
     return false;
 }
 //function stateless componenet does not update on the fly

@@ -53,10 +53,10 @@ function makeid() {
 
     return text;
 }
+
 module.exports = {
     handleError,
     sendPost,
     hideError,
     makeid,
-
 };
