@@ -33,14 +33,14 @@ const TaskForm = (props) => {
             className="taskForm">
 
 
-            <label htmlFor="title"> Title: </label>
-            <input id="taskTitle" type="text" name="title" placeholder="task title" />
+            <label htmlFor="title" class="is-size-2 has-text-centered"> Title: </label>
+            <input class="input is-normal" id="taskTitle" type="text" name="title" placeholder="task title" />
 
-            <label htmlFor="description">Description: </label>
-            <input id="taskDescription" type="text" name="title" placeholder="task description" />
+            <label htmlFor="description"class="is-size-2 has-text-centered">Description: </label>
+            <input class="input is-normal" id="taskDescription" type="text" name="title" placeholder="task description" />
 
-            <label htmlFor="cardDueDate">Due Date:</label>
-            <input id="taskDueDate" type="datetime-local" name="cardDueDate"></input>
+            <label htmlFor="cardDueDate"class="is-size-2 has-text-centered">Due Date:</label>
+            <input class="input is-normal" id="taskDueDate" type="datetime-local" name="cardDueDate"></input>
 
             <input className="makeTaskSubmit" type="submit" value="Make task" />
 
@@ -80,7 +80,7 @@ const loadTaskList = (tasks) => {
     toDo.innerHTML = `<strong>To Do</strong>`;
     inProgress.innerHTML = `<strong>In Progress</strong>`;
     done.innerHTML = `<strong>Done</strong>`;
-    garbage.innerHTML = `<strong>Garbage</strong>`;
+
     
     //if empty
     if (tasks.length === 0) {

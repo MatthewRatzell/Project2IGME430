@@ -25,6 +25,7 @@ const router = (app) => {
   app.post('/boards', mid.requiresLogin, controllers.Board.makeBoard);
   ////////
   app.post('/updateTask', mid.requiresLogin, controllers.Taskboard.updateTask);
+  app.post('/deleteTask', mid.requiresLogin, controllers.Taskboard.deleteTask);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 

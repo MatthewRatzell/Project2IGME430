@@ -28,9 +28,8 @@ async function drop(ev) {
   ev.preventDefault();
 
 
-  if (ev.target.id === 'toDo' || ev.target.id === "inProgress" || ev.target.id === "done") {
+  if (ev.target.id === 'toDo' || ev.target.id === "inProgress" || ev.target.id === "done" ) {
     var data = ev.dataTransfer.getData("text");
-    //console.log(document.getElementById(data));
     ev.target.appendChild(document.getElementById(data));
     //this is where we handle changing where it was left off
 
@@ -52,9 +51,18 @@ async function drop(ev) {
       const newSpot = ev.target.id;
       await sendPost('/updateTask', { title, newSpot, _csrf });
     }
+
   }
   //Set up the garbage to delete cards that are dragged into it
-  else if(ev.target.id === 'garbage'){
+  else if (ev.target.id === 'garbageBin') {
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+
+    console.log('into the garbage');
+    const _csrf = await getCsrfToken();
+    const title = data;
+    location.reload();
+    await sendPost('/deleteTask', { title, _csrf });
 
   }
 

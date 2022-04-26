@@ -13,41 +13,50 @@
 <body>
 
 
-  <nav><a href="/login"></a>
-    <div class="navlink"><a href="/logout">Log out</a></div>
-  </nav>
 
-  <div class="navlink"><a id="changeBoard" href="/boards">Change Board</a></div>
 
-  <section id="makeTask">
-  </section>
+
 
   <section class="container">
-
 
     <div class="taskboard-heading">
       <strong class="taskboard-heading-text is-size-2 has-text-centered">Task Board</strong>
     </div>
 
+    <section id="makeTask">
+    </section>
+
 
     <div class="taskboard">
       <div id="toDo" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
         ondragover="allowDrop(event)">
-
       </div>
       <div id="inProgress" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
         ondragover="allowDrop(event)">
-
       </div>
       <div id="done" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
         ondragover="allowDrop(event)">
-
       </div>
-      <div id="garbage" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
-        ondragover="allowDrop(event)">
 
+      <div id="innerNav">
+        <div class="btnLink">
+          <nav><a href="/login" class="is-size-3 has-text-centered"></a>
+            <div class="navlink"><a href="/logout" class="is-size-3 has-text-centered">Log out</a></div>
+          </nav>
+        </div>
+        <div class="btnLink">
+          <div class="navlink"><a id="changeBoard" href="/boards" class="is-size-3 has-text-centered">Change Board</a>
+          </div>
+        </div>
       </div>
+
+
+    </div id="dannyDevito">
+    <div id="garbage" class="garbageBin is-size-3 has-text-centered" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <img id="garbageBin" src="assets/img/trashCan.svg" alt="trashcan" width="200" height="250">
     </div>
+
+
   </section>
 
   <section id="burnerDivHome">

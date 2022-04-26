@@ -51,7 +51,7 @@ const setCurrentBoard = async (req, res) => {
 
   //console.dir(`Boards ID: ${boardsID}`);
 
-  const doc = await BoardModel.findOne({ title: boardsTitle }).exec();
+  const doc = await BoardModel.findOne({ title: boardsTitle, owner: req.session.account }).exec();
 
   //console.dir(`Find One Id: ${doc._id}`);
 
