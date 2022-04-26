@@ -33,17 +33,19 @@ const TaskForm = (props) => {
             className="taskForm">
 
 
-            <label htmlFor="title" class="is-size-2 has-text-centered"> Title: </label>
-            <input class="input is-normal" id="taskTitle" type="text" name="title" placeholder="task title" />
+            <div id="inputs">
+                <label htmlFor="title" className="is-size-4 has-text-centered"> Title: </label>
+                <input className="input is-small" id="taskTitle" type="text" name="title" placeholder="task title" />
 
-            <label htmlFor="description"class="is-size-2 has-text-centered">Description: </label>
-            <input class="input is-normal" id="taskDescription" type="text" name="title" placeholder="task description" />
+                <label htmlFor="description" className="is-size-4 has-text-centered">Description: </label>
+                <input className="input is-small" id="taskDescription" type="text" name="title" placeholder="task description" />
 
-            <label htmlFor="cardDueDate"class="is-size-2 has-text-centered">Due Date:</label>
-            <input class="input is-normal" id="taskDueDate" type="datetime-local" name="cardDueDate"></input>
-
-            <input className="makeTaskSubmit" type="submit" value="Make task" />
-
+                <label htmlFor="cardDueDate" className="is-size-4 has-text-centered">Due Date:</label>
+                <input className="input is-small" id="taskDueDate" type="datetime-local" name="cardDueDate"></input>
+            </div>
+            <div id="submitBtn">
+                <input className="button" type="submit" value="Make task" />
+            </div>
 
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
         </form>
@@ -81,7 +83,7 @@ const loadTaskList = (tasks) => {
     inProgress.innerHTML = `<strong>In Progress</strong>`;
     done.innerHTML = `<strong>Done</strong>`;
 
-    
+
     //if empty
     if (tasks.length === 0) {
         return (

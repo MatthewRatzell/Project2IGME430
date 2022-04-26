@@ -1,7 +1,27 @@
 //use function with @include 'finctionanme'()//
 @mixin FlexCenter($flexDirection) {
-    display:flex;
-    justify-content:center;
-    align-content:center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     flex-direction: $flexDirection;
+}
+
+@mixin ButtonData() {
+    box-shadow: 2px 3px;
+
+    @keyframes mymove {
+        15% {
+            box-shadow: 5px 7px;
+        }
+    }
+
+    max-width: 150px;
+    max-height: 135px;
+    margin-bottom: 20px;
+    background-color: $buttonColor !important;
+    margin-inline: 5px;
+
+    :hover {
+        animation: mymove 1.5s;
+    }
 }

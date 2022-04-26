@@ -23,7 +23,7 @@ const handleLogin = (e) => {
     }
 
     //send the post to call our router 
-    helper.sendPost(e.target.action, { username, pass,premium, _csrf });
+    helper.sendPost(e.target.action, { username, pass, premium, _csrf });
     return false;
 }
 
@@ -62,12 +62,17 @@ const LoginWindow = (props) => {
             method="POST"
             className="mainForm">
 
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="formSubmit" type="submit" value="Sign in" />
+            <div id="inputs">
+                <label htmlFor="username" className="is-size-4 has-text-centered">Username: </label>
+                <input className="input is-small" id="user" type="text" name="username" placeholder="username" />
+                <label htmlFor="pass" className="is-size-4 has-text-centered" >Password: </label>
+                <input className="input is-small" id="pass" type="password" name="pass" placeholder="password" />
+                <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            </div>
+            <div className="break"></div>
+            <div id="submitBtn">
+                <input className="button" type="submit" value="Sign in" />
+            </div>
         </form>
     );
 };
@@ -82,15 +87,19 @@ const SignupWindow = (props) => {
             method="POST"
             className="mainForm"
         >
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass2">Password: </label>
-            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="formSubmit" type="submit" value="Sign in" />
-
+            <div id="inputs">
+                <label htmlFor="username" className="is-size-4 has-text-centered">Username: </label>
+                <input className="input is-small" id="user" type="text" name="username" placeholder="username" />
+                <label htmlFor="pass" className="is-size-4 has-text-centered">Password: </label>
+                <input className="input is-small" id="pass" type="password" name="pass" placeholder="password" />
+                <label htmlFor="pass2" className="is-size-4 has-text-centered">Password: </label>
+                <input className="input is-small" id="pass2" type="password" name="pass2" placeholder="retype password" />
+                <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            </div>
+            <div className="break"></div>
+            <div id="submitBtn">
+                <input className="button" type="submit" value="Sign Up" />
+            </div>
         </form>
     );
 };
@@ -106,17 +115,17 @@ const init = async () => {
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
 
-    loginButton.addEventListener('click',(e)=>{
+    loginButton.addEventListener('click', (e) => {
         e.preventDefault();
         ReactDOM.render(<LoginWindow csrf={data.csrfToken} />,
-        document.getElementById('content'));
+            document.getElementById('content'));
         return false;
     });
 
-    signupButton.addEventListener('click',(e)=>{
+    signupButton.addEventListener('click', (e) => {
         e.preventDefault();
         ReactDOM.render(<SignupWindow csrf={data.csrfToken} />,
-        document.getElementById('content'));
+            document.getElementById('content'));
         return false;
     });
 

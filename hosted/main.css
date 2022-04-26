@@ -14,6 +14,49 @@ input {
   display: inline;
 }
 
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.taskForm,
+#loginForm, #signupForm {
+  padding-left: 1%;
+  padding-top: 1%;
+  display: flex;
+  flex-direction: column;
+}
+.taskForm label,
+#loginForm label, #signupForm label {
+  color: #a5a5f6;
+}
+.taskForm #inputs,
+#loginForm #inputs, #signupForm #inputs {
+  max-width: 35%;
+}
+.taskForm #submitBtn,
+#loginForm #submitBtn, #signupForm #submitBtn {
+  margin-top: 1%;
+}
+
+#loginForm, #signupForm {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#login {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+#login #innerNav {
+  margin-top: 17%;
+}
+
 .container {
   width: 90%;
   min-width: 50%;

@@ -1,25 +1,36 @@
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>taskMaker</title>
   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-  <link rel="shortcut icon" href="/assets/img/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="/assets/main.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="shortcut icon" href="/assets/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="/assets/main.css" />
 </head>
-<body> 
-  <nav><a href="/login"></a>
-    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
-    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
-  </nav>
-  
+
+<body>
+
+<div id="login">
+  <div id="innerNav">
+    <div class="btnLink">
+      <a class="is-size-3 has-text-centered" id="loginButton" href="/login">Login</a>
+    </div>
+    <div class="btnLink">
+      <a class="is-size-3 has-text-centered" id="signupButton" href="/signup">Signup</a>
+    </div>
+  </div>
+
+
   <section id="content">
 
   </section>
-
+</div>
   <div id="taskMessage" class='hidden'>
     <h3><span id="errorMessage"></span></h3>
   </div>
   <script src="/assets/loginBundle.js"></script>
 </body>
+
 </html>
