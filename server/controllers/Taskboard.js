@@ -54,10 +54,10 @@ const updateTask = async (req, res) => {
     { title: cardToUpdate },
     {
       //now change the values we need to change
-      $set:{ 'currentSpot': `${newSpotOnBoard}`}
+      $set: { 'currentSpot': `${newSpotOnBoard}` }
     }
   );
-
+  console.log('task successfully updated');
 };
 
 module.exports = {

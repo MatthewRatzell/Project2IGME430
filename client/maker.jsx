@@ -12,7 +12,7 @@ const handletask = (e) => {
 
     const currentSpot = 'toDo';
 
-    if (!title || !description || !dueDate ||!currentSpot) {
+    if (!title || !description || !dueDate || !currentSpot) {
         helper.handleError('All fields are required!');
         return false;
     }
@@ -68,17 +68,20 @@ const Task = (props) => {
 
     );
 }
+
 const loadTaskList = (tasks) => {
     //grab our 3 different areas to plug into as well as the burner div
     const toDo = document.getElementById('toDo');
     const inProgress = document.getElementById('inProgress');
     const done = document.getElementById('done');
+    const garbage = document.getElementById('garbage');
     const burnerDivsHome = document.getElementById('burnerDivHome');
 
-    toDo.innerHTML =`<strong>To Do</strong>`;
-    inProgress.innerHTML =`<strong>In Progress</strong>`;
-    done.innerHTML =`<strong>Done</strong>`;
-
+    toDo.innerHTML = `<strong>To Do</strong>`;
+    inProgress.innerHTML = `<strong>In Progress</strong>`;
+    done.innerHTML = `<strong>Done</strong>`;
+    garbage.innerHTML = `<strong>Garbage</strong>`;
+    
     //if empty
     if (tasks.length === 0) {
         return (
@@ -110,16 +113,15 @@ const loadTaskList = (tasks) => {
         else if (tasks[i].currentSpot == 'done') {
             done.append(document.getElementById('burnerDiv'));
         }
-        
+
         //now that the first burner div has been moved to todo we need to change its id
-        document.getElementById('burnerDiv').id = helper.makeid();
+        document.getElementById('burnerDiv').id = tasks[i].title;
 
         //first duplicate our burner div and add it to the home of divs 
         burnerDivsHome.append(document.getElementById('burnerDivCopy').cloneNode(true));
     }
 
 }
-
 //function that handles loading tasks from server
 const loadTasksFromServer = async () => {
     //get the response from the router so we have our data.tasks
@@ -128,6 +130,7 @@ const loadTasksFromServer = async () => {
 
     loadTaskList(data.tasks);
 }
+
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();

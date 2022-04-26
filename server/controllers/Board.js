@@ -62,8 +62,7 @@ const setCurrentBoard = async (req, res) => {
   //set the boards for the tasks
   req.session.board = Board.toAPI(doc);
 
-  //make sure we actually set the board correctly 
-  //console.dir(`Req Sesseion ID: ${req.session.board._id}`);
+
 
   return res.json({ redirect: '/taskBoard' });
 };

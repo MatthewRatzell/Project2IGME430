@@ -14,6 +14,7 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   //how we check on the clientside if the current user has premium
   app.get('/checkPremium', mid.requiresLogin, controllers.Account.checkPremium);
+  app.post('/makePremium', mid.requiresLogin, controllers.Account.makePremium);
   //much like login this is where we are gonna set our currently selected board in the session
   app.post('/setCurrentBoard',mid.requiresLogin,controllers.Board.setCurrentBoard);
   app.get('/taskBoard', mid.requiresLogin, controllers.Taskboard.taskPage);

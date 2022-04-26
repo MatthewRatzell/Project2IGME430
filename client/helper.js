@@ -36,7 +36,12 @@ const sendPost = async (url, data, handler) => {
 
 
 };
-
+const getCsrfToken = async () => {
+    const response = await fetch('/getToken');
+    const data = await response.json();
+  
+    return data.csrfToken;
+  }
 const hideError = () => {
     document.getElementById('taskMessage').classList.add('hidden');
 };
@@ -59,4 +64,5 @@ module.exports = {
     sendPost,
     hideError,
     makeid,
+    getCsrfToken
 };
