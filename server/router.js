@@ -26,7 +26,7 @@ const router = (app) => {
   /// /////
   app.post('/updateTask', mid.requiresLogin, mid.requiresSecure, controllers.Taskboard.updateTask);
   app.post('/deleteTask', mid.requiresLogin, mid.requiresSecure, controllers.Taskboard.deleteTask);
-  app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/', controllers.Account.loginPage);
 };
 
 module.exports = router;
