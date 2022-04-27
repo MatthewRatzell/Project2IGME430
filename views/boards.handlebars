@@ -8,33 +8,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="shortcut icon" href="/assets/img/favicon.png" />
     <link rel="stylesheet" type="text/css" href="/assets/main.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <button id="premiumBtn" class="btnClass" type="button">
-    Go Premium
+        Go Premium
     </button>
-
-    <nav><a href="/login"></a>
-        <div class="navlink"><a href="/logout">Log out</a></div>
-    </nav>
 
     <section id="makeTask">
     </section>
 
+    <div id="boardsForm">
+    </div>
+
     <section class="container">
-
-
-        <div class="taskboard-heading">
-            <strong class="taskboard-heading-text is-size-2 has-text-centered">Available TaskBoards</strong>
+        <div class="boards-heading">
+            <strong class="taskboard-heading-text is-size-2 "><u>Available TaskBoards</u></strong>
         </div>
-
-        <div id="boardsForm">
-
-        </div>
-
         <div id="boards">
-
         </div>
 
     </section>
@@ -44,12 +39,6 @@
         <div id="burnerDivCopy"></div>
         <div id="burnerDivCopy"></div>
     </section>
-
-    <div id="taskMessage" class='hidden'>
-        <h3><span id="errorMessage"></span></h3>
-    </div>
-
-
 
     <script src="/assets/boardsBundle.js"></script>
     <script src="/assets/client.js"></script>

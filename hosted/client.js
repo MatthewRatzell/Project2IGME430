@@ -61,7 +61,7 @@ async function drop(ev) {
     console.log('into the garbage');
     const _csrf = await getCsrfToken();
     const title = data;
-    location.reload();
+    //location.reload();
     await sendPost('/deleteTask', { title, _csrf });
 
   }

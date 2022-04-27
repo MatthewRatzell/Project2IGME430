@@ -6,8 +6,7 @@ const { Board } = models;
 const boardPage = (req, res) => res.render('boards');
 
 const makeBoard = async (req, res) => {
-  if (req.session.account.premium == '1') {
-
+  if (req.session.account.premium === '1') {
     if (!req.body.title) {
       return res.status(400).json({ error: 'All fields are required' });
     }
@@ -22,7 +21,6 @@ const makeBoard = async (req, res) => {
         title: newBoard.title,
 
       });
-
     } catch (err) {
       if (err.code === 11000) {
         return res.status(400).json({ error: 'Board already exists!' });
@@ -30,10 +28,10 @@ const makeBoard = async (req, res) => {
       return res.status(400).json({ error: 'An error occured' });
     }
   }
-  else {
-    console.dir('Gimme ur bread bitch');
-  }
+  return res.status(200).json({
+    result: 'Account Is not premium please upgrade your account',
 
+  });
 };
 
 const getBoards = (req, res) => BoardModel.findByOwner(req.session.account._id, (err, docs) => {
@@ -45,24 +43,14 @@ const getBoards = (req, res) => BoardModel.findByOwner(req.session.account._id, 
 });
 
 const setCurrentBoard = async (req, res) => {
-
   const boardsTitle = `${req.body.title}`;
-  const boardsID = `${req.body.boardsID}`;
-
-  //console.dir(`Boards ID: ${boardsID}`);
-
   const doc = await BoardModel.findOne({ title: boardsTitle, owner: req.session.account }).exec();
-
-  //console.dir(`Find One Id: ${doc._id}`);
-
   if (!doc) {
     return res.status(400).json({ error: 'Board is requred or is not actually a board' });
   }
 
-  //set the boards for the tasks
+  // set the boards for the tasks
   req.session.board = Board.toAPI(doc);
-
-
 
   return res.json({ redirect: '/taskBoard' });
 };
@@ -71,6 +59,6 @@ module.exports = {
   boardPage,
   makeBoard,
   getBoards,
-  setCurrentBoard
+  setCurrentBoard,
 
 };

@@ -6,7 +6,7 @@ const handleboard = (e) => {
 
     e.preventDefault();
 
-    helper.hideError();
+
 
     const title = e.target.querySelector('#boardTitle').value;
     const _csrf = e.target.querySelector('#_csrf').value;
@@ -24,21 +24,24 @@ const handleboard = (e) => {
 const MakeNewBoardForm = (props) => {
     return (
 
-        <form id="addNewBoardForm1"
+        <form id="addNewBoardForm"
             name="addNewBoardForm2"
             onSubmit={handleboard}
             action="/boards"
             method="POST"
             className="addNewBoardForm3">
 
+            <div id="inputs">
+                <label htmlFor="title" className="is-size-4 has-text-centered">Add New Board</label>
+                <input className="input is-small" id="boardTitle" type="text" name="title" placeholder="board title" />
+                <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            </div>
 
-            <label htmlFor="title"> Title: </label>
-            <input id="boardTitle" type="text" name="title" placeholder="board title" />
+            <div id="submitBtn">
+                <input className="button" type="submit" value="Make Board" />
+            </div>
 
-            <input className="makeBoardSubmit" type="submit" value="Make Board" />
 
-
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
         </form>
     );
 }
@@ -48,10 +51,8 @@ const setCurrentBoard = (e) => {
 
     e.preventDefault();
 
-    helper.hideError();
 
     const title = e.target.querySelector('#boardTitle').innerHTML;
-    const boardsID = e.target.querySelector('#boardsID').innerHTML;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if (!title) {
@@ -59,7 +60,7 @@ const setCurrentBoard = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, { title, boardsID, _csrf });
+    helper.sendPost(e.target.action, { title, _csrf });
     return false;
 }
 
@@ -74,11 +75,11 @@ const Board = (props) => {
             className="setBoardForm">
 
 
-            <label htmlFor="title" id='boardTitle'> {props.board.title} </label>
+            <label className="is-size-4 has-text-centered" htmlFor="title" id='boardTitle'> {props.board.title} </label>
             <label htmlFor="boardsID" hidden={true} id="boardsID"> {props.board._id} </label>
 
 
-            <input className="makeBoardSubmit" type="submit" value="Select This Board" />
+            <input className="button" type="submit" value="Select This Board" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
 
         </form>

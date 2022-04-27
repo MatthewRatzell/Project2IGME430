@@ -1,3 +1,11 @@
+* {
+  font-family: "Libre Bodoni", serif;
+}
+
+h2 {
+  font-family: "Libre Bodoni", serif;
+}
+
 body {
   background-color: #4a4a7d;
 }
@@ -19,27 +27,40 @@ input {
   height: 0;
 }
 
+label {
+  color: #a5a5f6;
+}
+
 .taskForm,
-#loginForm, #signupForm {
+#loginForm,
+#signupForm,
+#addNewBoardForm {
   padding-left: 1%;
   padding-top: 1%;
   display: flex;
   flex-direction: column;
 }
 .taskForm label,
-#loginForm label, #signupForm label {
+#loginForm label,
+#signupForm label,
+#addNewBoardForm label {
   color: #a5a5f6;
 }
 .taskForm #inputs,
-#loginForm #inputs, #signupForm #inputs {
+#loginForm #inputs,
+#signupForm #inputs,
+#addNewBoardForm #inputs {
   max-width: 35%;
 }
 .taskForm #submitBtn,
-#loginForm #submitBtn, #signupForm #submitBtn {
+#loginForm #submitBtn,
+#signupForm #submitBtn,
+#addNewBoardForm #submitBtn {
   margin-top: 1%;
 }
 
-#loginForm, #signupForm {
+#loginForm,
+#signupForm {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -65,18 +86,20 @@ input {
   flex-direction: column;
 }
 
+.boards-heading {
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  flex-direction: row;
+  font-family: sans-serif;
+}
+
 .taskboard-heading {
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: row;
   font-family: sans-serif;
-}
-.taskboard-heading .taskboard-heading-text {
-  font-size: 1.8rem;
-  padding: 0.8rem 1.7rem;
-  border-radius: 0.5rem;
-  margin: 1rem;
 }
 
 .taskboard {
@@ -107,7 +130,7 @@ input {
   max-width: 150px;
   max-height: 135px;
   margin-bottom: 20px;
-  background-color: #bee8e2 !important;
+  background-color: #687cbf !important;
   margin-inline: 20px;
 }
 
@@ -115,19 +138,44 @@ input {
   overflow: auto;
   padding: 5%;
   background-color: #c0bdbd !important;
-  height: 350px;
-  width: 325px;
+  max-height: 350px;
+  max-width: 325px;
   margin-bottom: 10px;
   justify-content: center;
 }
-.card .topOfCard {
-  margin-bottom: 5%;
+
+#collapsibleContent {
+  padding: 0 18px;
+  background-color: #8caae1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
-.card .middleOfCard {
+
+.collapsible {
+  background-color: #161848;
+  width: 100%;
+  color: #687cbf;
+}
+
+.middleOfCard {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
   margin-bottom: 10%;
 }
-.card h2,
-.card h3 {
+.middleOfCard h2 {
+  font-size: 24px;
+}
+
+.bottomOfCard h2 {
+  font-size: 10px;
+  max-height: 12%;
+}
+
+h2,
+h3 {
   font-size: 2rem;
   margin-top: 0;
   color: #000080;
@@ -157,7 +205,7 @@ input {
   max-width: 150px;
   max-height: 135px;
   margin-bottom: 20px;
-  background-color: #bee8e2 !important;
+  background-color: #687cbf !important;
   margin-inline: 5px;
 }
 @keyframes mymove {
@@ -166,5 +214,22 @@ input {
   }
 }
 .btnLink :hover {
+  animation: mymove 1.5s;
+}
+
+#boardsLogout {
+  box-shadow: 2px 3px;
+  max-width: 150px;
+  max-height: 135px;
+  margin-top: 20px;
+  background-color: #687cbf !important;
+  margin-inline: 5px;
+}
+@keyframes mymove {
+  15% {
+    box-shadow: 5px 7px;
+  }
+}
+#boardsLogout :hover {
   animation: mymove 1.5s;
 }

@@ -3,7 +3,6 @@ const helper = require('./helper.js');
 //on submit for our forms
 const handletask = (e) => {
     e.preventDefault();
-    helper.hideError();
 
     const title = e.target.querySelector('#taskTitle').value;
     const description = e.target.querySelector('#taskDescription').value;
@@ -55,19 +54,20 @@ const TaskForm = (props) => {
 const Task = (props) => {
     return (
         <div className="card">
-            <div className="topOfCard">
-                <h2>{props.task.title}</h2>
-            </div>
 
-            <div className="middleOfCard">
-                <h2>{props.task.description}</h2>
-            </div>
+            <button className="collapsible Button is-size-4">{props.task.title}</button>
 
-            <div className="bottomOfCard">
-                <h2>{props.task.dueDate}</h2>
+            <div id="collapsibleContent" >
+
+                <div className="middleOfCard">
+                    <h2>{props.task.description}</h2>
+                </div>
+                <div className="bottomOfCard">
+                    <h2>Due:{props.task.dueDate}</h2>
+                </div>
+
             </div>
         </div>
-
     );
 }
 
@@ -76,12 +76,11 @@ const loadTaskList = (tasks) => {
     const toDo = document.getElementById('toDo');
     const inProgress = document.getElementById('inProgress');
     const done = document.getElementById('done');
-    const garbage = document.getElementById('garbage');
     const burnerDivsHome = document.getElementById('burnerDivHome');
 
-    toDo.innerHTML = `<strong>To Do</strong>`;
-    inProgress.innerHTML = `<strong>In Progress</strong>`;
-    done.innerHTML = `<strong>Done</strong>`;
+    toDo.innerHTML = `<strong><u>To Do</u></strong>`;
+    inProgress.innerHTML = `<strong><u>In Progress</u></strong>`;
+    done.innerHTML = `<strong><u>Done</u></strong>`;
 
 
     //if empty
@@ -123,7 +122,12 @@ const loadTaskList = (tasks) => {
         burnerDivsHome.append(document.getElementById('burnerDivCopy').cloneNode(true));
     }
 
+    //now that all of the tasks are made  make sure we hook up the collaspability we want
+    helper.makeCardsCollaspsible();
+
 }
+
+
 //function that handles loading tasks from server
 const loadTasksFromServer = async () => {
     //get the response from the router so we have our data.tasks

@@ -11,6 +11,7 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    unique: true,
     set: setTitle,
   },
   description: {

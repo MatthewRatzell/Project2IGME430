@@ -8,7 +8,7 @@ const helper = require('./helper.js');
 const handleLogin = (e) => {
     //e is the form calling
     e.preventDefault();
-    helper.hideError();
+    //helper.hideError();
 
     //pull in the 3 things we need from the form
     const username = e.target.querySelector('#user').value;
@@ -29,7 +29,7 @@ const handleLogin = (e) => {
 
 const handleSignup = (e) => {
     e.preventDefault();
-    helper.hideError();
+    //helper.hideError();
 
     const username = e.target.querySelector('#user').value;
     const pass = e.target.querySelector('#pass').value;

@@ -7,6 +7,14 @@
 ///////////////////////////////////////////////////////////////////
 /////////////////////////whole sheet///////////////////////////////////
 /////////////////////////////////////////////////////////////////
+* {
+  font-family: 'Libre Bodoni', serif;
+}
+
+h2 {
+  font-family: 'Libre Bodoni', serif;
+}
+
 body {
   background-color: #4a4a7d;
 }
@@ -27,11 +35,18 @@ input {
   flex-basis: 100%;
   height: 0;
 }
+
+label {
+  color: #a5a5f6;
+}
+
 ///////////////////////////////////////////////////////////////////
 /////////////////////////Add New Task Form///////////////////////////////////
 /////////////////////////////////////////////////////////////////
 .taskForm,
-#loginForm,#signupForm {
+#loginForm,
+#signupForm,
+#addNewBoardForm {
   padding-left: 1%;
   padding-top: 1%;
   display: flex;
@@ -47,24 +62,30 @@ input {
 
   #submitBtn {
     margin-top: 1%;
-
-
   }
 }
+
+///////////////////////////////////////////////////////////////////
+/////////////////////////board///////////////////////////////////
+/////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////
 /////////////////////////login page///////////////////////////////////
 /////////////////////////////////////////////////////////////////
-#loginForm,#signupForm{
+#loginForm,
+#signupForm {
   @include FlexCenter(row);
   flex-wrap: wrap;
 }
-#login{
-  
+
+#login {
   @include FlexCenter(column);
-  #innerNav{
+
+  #innerNav {
     margin-top: 17%;
   }
 }
+
 ///////////////////////////////////////////////////////////////////
 /////////////////////////taskboard///////////////////////////////////
 /////////////////////////////////////////////////////////////////
@@ -76,16 +97,17 @@ input {
   flex-direction: column;
 }
 
+.boards-heading {
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  flex-direction: row;
+  font-family: sans-serif;
+}
+
 .taskboard-heading {
   @include FlexCenter(row);
   font-family: sans-serif;
-
-  .taskboard-heading-text {
-    font-size: 1.8rem;
-    padding: 0.8rem 1.7rem;
-    border-radius: 0.5rem;
-    margin: 1rem;
-  }
 }
 
 .taskboard {
@@ -135,28 +157,58 @@ input {
   overflow: auto;
   padding: 5%;
   background-color: rgb(192, 189, 189) !important;
-  height: 350px;
-  width: 325px;
+  max-height: 350px;
+  max-width: 325px;
   margin-bottom: 10px;
   justify-content: center;
 
-  .topOfCard {
-    margin-bottom: 5%;
-  }
+}
 
-  .middleOfCard {
-    margin-bottom: 10%;
-  }
+#collapsibleContent {
 
-  .bottomOfCard {}
+  padding: 0 18px;
+  background-color: rgb(140, 170, 225);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
 
-  h2,
-  h3 {
-    font-size: 2.0rem;
-    margin-top: 0;
-    color: #000080;
+.collapsible {
+  background-color: rgb(22, 24, 72);
+  width: 100%;
+  color:$buttonColor;
+
+
+
+
+}
+
+.middleOfCard {
+
+  @include FlexCenter(row);
+  margin-bottom: 10%;
+
+  h2 {
+    font-size: 24px;
   }
 }
+
+.bottomOfCard {
+
+  h2 {
+    font-size: 10px;
+    max-height: 12%;
+  }
+
+}
+
+h2,
+h3 {
+  font-size: 2.0rem;
+  margin-top: 0;
+  color: #000080;
+}
+
 
 ///////////////////////////////////////////////////////////////////
 /////////////////////////poopy ass navbar/////////////////////////
@@ -179,4 +231,24 @@ input {
   @include ButtonData();
 
 
+}
+
+#boardsLogout {
+  box-shadow: 2px 3px;
+
+  @keyframes mymove {
+    15% {
+      box-shadow: 5px 7px;
+    }
+  }
+
+  max-width: 150px;
+  max-height: 135px;
+  margin-top: 20px;
+  background-color: $buttonColor !important;
+  margin-inline: 5px;
+
+  :hover {
+    animation: mymove 1.5s;
+  }
 }

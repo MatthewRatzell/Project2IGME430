@@ -45,36 +45,32 @@ const getTasks = (req, res) => TaskModel.findByOwner(req.session.board._id, (err
 
 // does nothing atm just setting it up
 const updateTask = async (req, res) => {
-
   const cardToUpdate = req.body.title;
   const newSpotOnBoard = req.body.newSpot;
   // to shut the fucking linters mouth
   await TaskModel.updateOne(
-    //first give it the filter or a way to find the object
-    { title: cardToUpdate, owner:req.session.board },
+    // first give it the filter or a way to find the object
+    { title: cardToUpdate, owner: req.session.board },
     {
-      //now change the values we need to change
-      $set: { 'currentSpot': `${newSpotOnBoard}` }
-    }
+      // now change the values we need to change
+      $set: { currentSpot: `${newSpotOnBoard}` },
+    },
   );
-  console.log('task successfully updated');
+  return res.status(200).json({ result: 'Task Successfully updated' });
 };
 
 const deleteTask = async (req, res) => {
-
   const cardToUpdate = req.body.title;
   // to shut the fucking linters mouth
   await TaskModel.deleteOne({ title: cardToUpdate, owner: req.session.board });
 
-
   return res.status(200);
-
-}
+};
 module.exports = {
   taskPage,
   makeTask,
   getTasks,
   updateTask,
-  deleteTask
+  deleteTask,
 
 };

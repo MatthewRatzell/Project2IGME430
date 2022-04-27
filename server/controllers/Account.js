@@ -32,13 +32,11 @@ const login = (req, res) => {
 
     req.session.account = Account.toAPI(account);
 
-
     return res.json({ redirect: '/boards' });
   });
 };
 
 const signup = async (req, res) => {
-
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
   const pass2 = `${req.body.pass2}`;
@@ -60,7 +58,7 @@ const signup = async (req, res) => {
 
     req.session.account = Account.toAPI(newAccount);
 
-    //this is where we will generate the first board for the user automatically
+    // this is where we will generate the first board for the user automatically
     const boardData = {
       title: `${req.session.account.username}s Personal Taskboard`,
       owner: req.session.account._id,
@@ -68,11 +66,10 @@ const signup = async (req, res) => {
 
     const newBoard = new Board(boardData);
     await newBoard.save();
-    ////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////////////////////////////////////////
 
     return res.json({ redirect: '/boards' });
-
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
@@ -86,17 +83,16 @@ const checkPremium = (req, res) => res.json({ premiumStatus: req.session.account
 
 // does nothing atm just setting it up
 const makePremium = async (req, res) => {
-
   // to shut the fucking linters mouth
   await AccountModel.updateOne(
-    //first give it the filter or a way to find the object
+    // first give it the filter or a way to find the object
     { _id: req.session.account._id },
     {
-      //now change the values we need to change
-      $set: { 'premium': `1` }
-    }
+      // now change the values we need to change
+      $set: { premium: '1' },
+    },
   );
-
+  return res.status(200);
 };
 module.exports = {
   loginPage,
@@ -105,5 +101,5 @@ module.exports = {
   signup,
   getToken,
   checkPremium,
-  makePremium
+  makePremium,
 };

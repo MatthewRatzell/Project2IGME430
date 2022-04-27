@@ -4,8 +4,6 @@
 */
 const handleError = (message) => {
     console.log(`${message}`);
-    document.getElementById('errorMessage').textContent = message;
-    document.getElementById('taskMessage').classList.remove('hidden');
 };
 
 /* Sends post requests to the server using fetch. Will look for various
@@ -21,7 +19,7 @@ const sendPost = async (url, data, handler) => {
     });
 
     const result = await response.json();
-    document.getElementById('taskMessage').classList.add('hidden');
+
     if (result.error) {
         handleError(result.error);
     }
@@ -39,12 +37,31 @@ const sendPost = async (url, data, handler) => {
 const getCsrfToken = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
-  
+
     return data.csrfToken;
-  }
-const hideError = () => {
-    document.getElementById('taskMessage').classList.add('hidden');
-};
+}
+function makeCardsCollaspsible() {
+    let cards = document.getElementsByClassName("collapsible");
+
+
+    for (let i = 0; i < cards.length; i++) {
+        //whenever the cards button is click we do this function
+        cards[i].addEventListener("click", function () {
+
+            this.classList.toggle("active");
+            //grab the content it has to be the very next element in the card 
+            let content = this.nextElementSibling;
+
+            //if it has a maxHeight take it away
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } //else have it come down 
+            else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////main.js unedited//////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +79,7 @@ function makeid() {
 module.exports = {
     handleError,
     sendPost,
-    hideError,
     makeid,
+    makeCardsCollaspsible,
     getCsrfToken
 };
