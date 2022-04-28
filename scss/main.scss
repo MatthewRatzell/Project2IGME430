@@ -10,7 +10,9 @@
 * {
   font-family: 'Libre Bodoni', serif;
 }
-
+.button{
+  font-family: 'Libre Bodoni', serif;
+}
 h2 {
   font-family: 'Libre Bodoni', serif;
 }
@@ -116,6 +118,7 @@ label {
   justify-content: space-between;
   gap: 10px;
   font-family: sans-serif;
+  overflow: hidden
 }
 
 .taskboard-block {
@@ -144,11 +147,22 @@ label {
 
 }
 
-#toDo {}
+#toDo {
+  :hover{
 
-#inProgress {}
+  }
+}
 
-#done {}
+#inProgress {
+  :hover{
+
+  }
+}
+
+#done {
+  :hover{
+
+}}
 
 ///////////////////////////////////////////////////////////////////
 /////////////////////////cards///////////////////////////////////
@@ -176,7 +190,7 @@ label {
 .collapsible {
   background-color: rgb(22, 24, 72);
   width: 100%;
-  color:$buttonColor;
+  color: $buttonColor;
 
 
 
@@ -251,4 +265,31 @@ h3 {
   :hover {
     animation: mymove 1.5s;
   }
+}
+
+///////////////////////////////////////////////
+////////////////////errors/////////////////////
+///////////////////////////////////////////////
+#taskMessage {
+  display: flex;
+  justify-content: right;
+  align-content: center;
+  max-height: 15%;
+  padding-top: 2px;
+
+  #errorMessage {
+    outline: 3px solid rgb(255, 9, 9);
+    outline-offset: 3px;
+    color: #fa1f1f;
+    margin-right: 5%;
+  }
+
+}
+
+#hrefBtn{
+  display: flex;
+  align-content: center;
+  margin-right: 7px;
+  max-width:15%;
+  height:100%;
 }

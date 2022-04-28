@@ -4,6 +4,8 @@
 */
 const handleError = (message) => {
     console.log(`${message}`);
+    document.getElementById('errorMessage').textContent = message;
+    document.getElementById('taskMessage').classList.remove('hidden');
 };
 
 /* Sends post requests to the server using fetch. Will look for various
@@ -17,7 +19,7 @@ const sendPost = async (url, data, handler) => {
         },
         body: JSON.stringify(data),
     });
-
+    document.getElementById('taskMessage').classList.add('hidden');
     const result = await response.json();
 
     if (result.error) {
@@ -33,6 +35,9 @@ const sendPost = async (url, data, handler) => {
     }
 
 
+};
+const hideError = () => {
+    document.getElementById('taskMessage').classList.add('hidden');
 };
 const getCsrfToken = async () => {
     const response = await fetch('/getToken');
@@ -81,5 +86,6 @@ module.exports = {
     sendPost,
     makeid,
     makeCardsCollaspsible,
-    getCsrfToken
+    getCsrfToken,
+    hideError
 };

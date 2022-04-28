@@ -3,7 +3,7 @@ const helper = require('./helper.js');
 //on submit for our forms
 const handletask = (e) => {
     e.preventDefault();
-
+    helper.hideError();
     const title = e.target.querySelector('#taskTitle').value;
     const description = e.target.querySelector('#taskDescription').value;
     const dueDate = e.target.querySelector('#taskDueDate').value;
@@ -12,7 +12,7 @@ const handletask = (e) => {
     const currentSpot = 'toDo';
 
     if (!title || !description || !dueDate || !currentSpot) {
-        helper.handleError('All fields are required!');
+        helper.handleError('All Fields Are Required To Make Task!');
         return false;
     }
 

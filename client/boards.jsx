@@ -5,14 +5,14 @@ const helper = require('./helper.js');
 const handleboard = (e) => {
 
     e.preventDefault();
-
+    helper.hideError();
 
 
     const title = e.target.querySelector('#boardTitle').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if (!title) {
-        helper.handleError('All fields are required!');
+        helper.handleError('All Fields Are Required To Make A Board');
         return false;
     }
 
@@ -50,13 +50,13 @@ const MakeNewBoardForm = (props) => {
 const setCurrentBoard = (e) => {
 
     e.preventDefault();
-
+    helper.hideError();
 
     const title = e.target.querySelector('#boardTitle').innerHTML;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if (!title) {
-        helper.handleError('All fields are required!');
+        helper.handleError();
         return false;
     }
 
@@ -144,10 +144,10 @@ const goPremium = async () => {
     console.log('going premium client side');
     //first grab out btn and disable it as we wont be needing it now
     const premiumBtn = document.querySelector('#premiumBtn');
-    premiumBtn.hidden = true;
+    premiumBtn.style="display: none;"
     //next update the data on the server sending over only the csrf token
     const _csrf = await helper.getCsrfToken();
-    helper.sendPost('/makePremium', { premiumBtn, _csrf });
+    helper.sendPost('/makePremium', {  _csrf });
     //finally render the proper board for the user
     const _csrf2 = await helper.getCsrfToken();
     ReactDOM.render(
@@ -158,19 +158,17 @@ const goPremium = async () => {
 }
 const init = async () => {
 
-    const response = await fetch('/getToken');
-    const data = await response.json();
-
-    const premiumResponse = await fetch('/checkPremium');
-    const premiumData = await premiumResponse.json();
-
     //than grab our dom
     const premiumBtn = document.querySelector('#premiumBtn');
-
+    premiumBtn.style="display: none;"
+    const premiumResponse = await fetch('/checkPremium');
+    const premiumData = await premiumResponse.json();
     //only render the ability to add new forms if the user is premium and 1 equals premium
-    if (premiumData.premiumStatus == '1') {
-        //also make sure we hide the premium button if we dont need it
-        premiumBtn.hidden = true;
+    if (premiumData.premiumStatus === '1') {
+        premiumBtn.style="display: none;"
+        const response = await fetch('/getToken');
+        const data = await response.json();
+
         //render our task form and once again because we are  posting we gotta make it secure
         ReactDOM.render(
             <MakeNewBoardForm csrf={data.csrfToken} />,
@@ -179,6 +177,7 @@ const init = async () => {
     }
     //else we set up our onclick event for the premium button
     else {
+        premiumBtn.style=" ";
         premiumBtn.onclick = goPremium;
     }
 }

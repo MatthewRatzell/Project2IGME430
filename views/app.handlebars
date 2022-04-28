@@ -16,6 +16,11 @@
 
 <body>
 
+   <div id="taskMessage" class='hidden'>
+    <h3><span class='is-size-5' id="errorMessage"></span></h3>
+    <button id="hrefBtn" class="button"><a href="/logout" class="is-size-5 has-text-centered">Log out</a></button>
+    <button id="hrefBtn" class="button"><a id="changeBoard" href="/boards" class="is-size-5 has-text-centered">Change Board</a></button>
+  </div>
 
   <section id="makeTask">
 
@@ -24,14 +29,9 @@
   <div class="taskboard-heading">
     <strong class="taskboard-heading-text is-size-2 has-text-centered"><u>Task Board</u></strong>
   </div>
-
-
-
-
   <section class="container">
-
-
     <div class="taskboard">
+
       <div id="toDo" class="taskboard-block is-size-3 has-text-centered" ondrop="drop(event)"
         ondragover="allowDrop(event)">
       </div>
@@ -42,19 +42,9 @@
         ondragover="allowDrop(event)">
       </div>
 
-      <div id="innerNav">
-        <div class="btnLink">
-          <nav><a href="/login" class="is-size-3 has-text-centered"></a>
-            <div class="navlink"><a href="/logout" class="is-size-3 has-text-centered">Log out</a></div>
-          </nav>
-        </div>
-        <div class="btnLink">
-          <div class="navlink"><a id="changeBoard" href="/boards" class="is-size-3 has-text-centered">Change Board</a>
-          </div>
-        </div>
-      </div>
 
 
+    </div>
     </div id="dannyDevito">
     <div id="garbage" class="garbageBin is-size-3 has-text-centered" ondrop="drop(event)" ondragover="allowDrop(event)">
       <img id="garbageBin" src="assets/img/trashCan.svg" alt="trashcan" width="200" height="250">

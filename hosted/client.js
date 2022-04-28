@@ -1,4 +1,5 @@
 const sendPost = async (url, data) => {
+
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -6,6 +7,10 @@ const sendPost = async (url, data) => {
     },
     body: JSON.stringify(data),
   });
+  document.getElementById('taskMessage').classList.add('hidden');
+};
+function hideError () {
+  document.getElementById('taskMessage').classList.add('hidden');
 };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////Helpers///////////////////////////////////////////////////////////
@@ -34,18 +39,21 @@ async function drop(ev) {
     //this is where we handle changing where it was left off
 
     if (ev.target.id === 'toDo') {
+      hideError();
       const _csrf = await getCsrfToken();
       const title = data;
       const newSpot = ev.target.id;
       await sendPost('/updateTask', { title, newSpot, _csrf });
     }
     else if (ev.target.id === "inProgress") {
+      hideError();
       const _csrf = await getCsrfToken();
       const title = data;
       const newSpot = ev.target.id;
       await sendPost('/updateTask', { title, newSpot, _csrf });
     }
     else if (ev.target.id === "done") {
+      hideError();
       const _csrf = await getCsrfToken();
       const title = data;
       const newSpot = ev.target.id;
@@ -55,10 +63,9 @@ async function drop(ev) {
   }
   //Set up the garbage to delete cards that are dragged into it
   else if (ev.target.id === 'garbageBin') {
+    hideError();
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
-
-    console.log('into the garbage');
     const _csrf = await getCsrfToken();
     const title = data;
     //location.reload();

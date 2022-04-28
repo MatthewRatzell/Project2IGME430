@@ -8,7 +8,7 @@ const boardPage = (req, res) => res.render('boards');
 const makeBoard = async (req, res) => {
   if (req.session.account.premium === '1') {
     if (!req.body.title) {
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ error: 'All Fields Are Required To Make A Board' });
     }
     const boardData = {
       title: req.body.title,
@@ -23,13 +23,13 @@ const makeBoard = async (req, res) => {
       });
     } catch (err) {
       if (err.code === 11000) {
-        return res.status(400).json({ error: 'Board already exists!' });
+        return res.status(400).json({ error: 'Board Already Exists!' });
       }
-      return res.status(400).json({ error: 'An error occured' });
+      return res.status(400).json({ error: 'An Error Occured While Creating Board' });
     }
   }
-  return res.status(200).json({
-    result: 'Account Is not premium please upgrade your account',
+  return res.status(400).json({
+    error: 'Account Is Not Premium Please Upgrade Your Account',
 
   });
 };
@@ -37,16 +37,16 @@ const makeBoard = async (req, res) => {
 const getBoards = (req, res) => BoardModel.findByOwner(req.session.account._id, (err, docs) => {
   if (err) {
     console.log(err);
-    return res.status(400).json({ error: 'An error occured!' });
+    return res.status(400).json({ error: 'Error Retrieving Boards' });
   }
-  return res.json({ boards: docs });
+  return res.status(200).json({ boards: docs });
 });
 
 const setCurrentBoard = async (req, res) => {
   const boardsTitle = `${req.body.title}`;
   const doc = await BoardModel.findOne({ title: boardsTitle, owner: req.session.account }).exec();
   if (!doc) {
-    return res.status(400).json({ error: 'Board is requred or is not actually a board' });
+    return res.status(400).json({ error: 'Board Is Requred Or Is Not Actually A Board' });
   }
 
   // set the boards for the tasks

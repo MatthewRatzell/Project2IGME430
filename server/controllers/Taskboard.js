@@ -7,7 +7,7 @@ const taskPage = (req, res) => res.render('app');
 
 const makeTask = async (req, res) => {
   if (!req.body.title || !req.body.description || !req.body.dueDate || !req.body.currentSpot) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: 'All Fields Are Required To Make A Task' });
   }
 
   const taskData = {
@@ -29,18 +29,18 @@ const makeTask = async (req, res) => {
     });
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(400).json({ error: 'Task already exists!' });
+      return res.status(400).json({ error: 'Task Already Exists!' });
     }
-    return res.status(400).json({ error: 'An error occured' });
+    return res.status(400).json({ error: 'An Error Occured While Making The Task' });
   }
 };
 
 const getTasks = (req, res) => TaskModel.findByOwner(req.session.board._id, (err, docs) => {
   if (err) {
     console.log(err);
-    return res.status(400).json({ error: 'An error occured!' });
+    return res.status(400).json({ error: 'An Error Occured While Getting The Tasks' });
   }
-  return res.json({ tasks: docs });
+  return res.status(200).json({ tasks: docs });
 });
 
 // does nothing atm just setting it up
@@ -56,7 +56,7 @@ const updateTask = async (req, res) => {
       $set: { currentSpot: `${newSpotOnBoard}` },
     },
   );
-  return res.status(200).json({ result: 'Task Successfully updated' });
+  return res.status(201).json({ result: 'Task Successfully Updated' });
 };
 
 const deleteTask = async (req, res) => {
@@ -64,7 +64,7 @@ const deleteTask = async (req, res) => {
   // to shut the fucking linters mouth
   await TaskModel.deleteOne({ title: cardToUpdate, owner: req.session.board });
 
-  return res.status(200);
+  return res.status(201).json({ result: 'Task Successfully Deleted' });
 };
 module.exports = {
   taskPage,

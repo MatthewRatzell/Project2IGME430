@@ -8,7 +8,7 @@ const helper = require('./helper.js');
 const handleLogin = (e) => {
     //e is the form calling
     e.preventDefault();
-    //helper.hideError();
+    helper.hideError();
 
     //pull in the 3 things we need from the form
     const username = e.target.querySelector('#user').value;
@@ -18,7 +18,7 @@ const handleLogin = (e) => {
     const premium = '0';
 
     if (!username || !pass || !premium) {
-        helper.handleError('Username or password is empty!(client side)');
+        helper.handleError('Username Or Password Is Empty');
         return false;
     }
 
@@ -29,7 +29,7 @@ const handleLogin = (e) => {
 
 const handleSignup = (e) => {
     e.preventDefault();
-    //helper.hideError();
+    helper.hideError();
 
     const username = e.target.querySelector('#user').value;
     const pass = e.target.querySelector('#pass').value;
@@ -39,11 +39,11 @@ const handleSignup = (e) => {
     const premium = '0';
 
     if (!username || !pass || !pass2 || !premium) {
-        helper.handleError('All fields are required(client side)');
+        helper.handleError('All Fields Are Required');
         return false;
     }
     if (pass !== pass2) {
-        helper.handleError('Passwords do not match!');
+        helper.handleError('Passwords Do Not Match!');
         return false;
     }
 
@@ -92,7 +92,7 @@ const SignupWindow = (props) => {
                 <input className="input is-small" id="user" type="text" name="username" placeholder="username" />
                 <label htmlFor="pass" className="is-size-4 has-text-centered">Password: </label>
                 <input className="input is-small" id="pass" type="password" name="pass" placeholder="password" />
-                <label htmlFor="pass2" className="is-size-4 has-text-centered">Password: </label>
+                <label htmlFor="pass2" className="is-size-4 has-text-centered">Retype Password: </label>
                 <input className="input is-small" id="pass2" type="password" name="pass2" placeholder="retype password" />
                 <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             </div>

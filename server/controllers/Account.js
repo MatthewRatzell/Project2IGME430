@@ -22,12 +22,12 @@ const login = (req, res) => {
   const premium = `${req.body.premium}`;
 
   if (!username || !pass || !premium) {
-    return res.status(400).json({ error: 'All fields are required!' });
+    return res.status(400).json({ error: 'Missing Username Or Password!' });
   }
 
   return Account.authenticate(username, pass, (err, account) => {
     if (err || !account) {
-      return res.status(400).json({ error: 'All fields are required!(server side)' });
+      return res.status(400).json({ error: 'Username and Password Does Not Match' });
     }
 
     req.session.account = Account.toAPI(account);
@@ -43,11 +43,11 @@ const signup = async (req, res) => {
   const premium = `${req.body.premium}`;
 
   if (!username || !pass || !pass2 || !premium) {
-    return res.status(400).json({ error: 'All fields are required!(server side)' });
+    return res.status(400).json({ error: 'All Fields Are Required To Sign Up' });
   }
 
   if (pass !== pass2) {
-    return res.status(400).json({ error: 'Passwords do not match' });
+    return res.status(400).json({ error: 'Passwords Do Not Match' });
   }
 
   try {
@@ -73,9 +73,9 @@ const signup = async (req, res) => {
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
-      return res.status(400).json({ error: 'Username already in use' });
+      return res.status(400).json({ error: 'Error Creating Free Board This is Not Your Fault' });
     }
-    return res.status(400).json({ error: 'An error occured' });
+    return res.status(400).json({ error: 'An Error Occured' });
   }
 };
 
@@ -83,16 +83,21 @@ const checkPremium = (req, res) => res.json({ premiumStatus: req.session.account
 
 // does nothing atm just setting it up
 const makePremium = async (req, res) => {
-  // to shut the fucking linters mouth
-  await AccountModel.updateOne(
-    // first give it the filter or a way to find the object
-    { _id: req.session.account._id },
-    {
-      // now change the values we need to change
-      $set: { premium: '1' },
-    },
-  );
-  return res.status(200);
+  try {
+    await AccountModel.updateOne(
+      // first give it the filter or a way to find the object
+      { _id: req.session.account._id },
+      {
+        // now change the values we need to change
+        $set: { premium: '1' },
+      },
+    );
+    //also update session
+    req.session.account.premium = '1';
+  } catch (err) {
+    return res.status(400).json({ error: 'Account Is Already Premium Please Log Out Than Back In' });
+  }
+  //return res.status(201);
 };
 module.exports = {
   loginPage,

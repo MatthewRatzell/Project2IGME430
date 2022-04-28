@@ -9,12 +9,20 @@
     <link rel="shortcut icon" href="/assets/img/favicon.png" />
     <link rel="stylesheet" type="text/css" href="/assets/main.css" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <div id="taskMessage" class='hidden'>
+        <h3><span class='is-size-5' id="errorMessage"></span></h3>
+        <button id="hrefBtn" class="button"><a href="/logout" class="is-size-5 has-text-centered">Log out</a></button>
+    </div>
+    <div id="taskMessage" class='hidden'>
+        <h3><span id="errorMessage"></span></h3>
+    </div>
+
     <button id="premiumBtn" class="btnClass" type="button">
         Go Premium
     </button>
