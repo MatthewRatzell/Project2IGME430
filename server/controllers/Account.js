@@ -73,7 +73,7 @@ const signup = async (req, res) => {
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
-      return res.status(400).json({ error: 'Error Creating Free Board This is Not Your Fault' });
+      return res.status(400).json({ error: 'Error Creating Account Username Already In Use' });
     }
     return res.status(400).json({ error: 'An Error Occured' });
   }
