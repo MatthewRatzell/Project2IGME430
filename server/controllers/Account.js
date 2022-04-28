@@ -97,7 +97,7 @@ const makePremium = async (req, res) => {
   } catch (err) {
     return res.status(400).json({ error: 'Account Is Already Premium Please Log Out Than Back In' });
   }
-  //return res.status(201);
+  return res.status(201);
 };
 module.exports = {
   loginPage,
